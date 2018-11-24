@@ -1,0 +1,3 @@
+[submodule "UD_French-GSD"]
+	path = UD_French-GSD
+	url = https://github.com/UniversalDependencies/UD_French-GSD.git
