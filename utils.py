@@ -158,7 +158,7 @@ def create_dataset(sentences, f_module, *args, with_negatives=False):
 
     return np.array(x), np.array(y)
 
-def eisner(sentence, f_module, model=None, perfect=False):
+def eisner(sentence, f_module, *args, model=None, perfect=False):
     n = sentence.shape[0]
 
     full_left = []
@@ -200,7 +200,7 @@ def eisner(sentence, f_module, model=None, perfect=False):
                     prediction[1] = 1
                     label = sentence[i2][f_module.label_i]
             else:
-                x, _ = f_module.create_example(sentence[i1], sentence[i2])
+                x, _ = f_module.create_example(sentence[i1], sentence[i2], *args)
                 prediction = model.predict(x.reshape(1, -1))[0]
 
                 i = np.argmax(prediction[2:])
@@ -293,11 +293,11 @@ def predict_sentence(sentence, f_module, full_left, full_right, part, labels):
     decompose_full(sentence_predicted, f_module, 0, len(sentence) - 1, full_left, full_right, part, labels)
     return sentence_predicted
 
-def predict_sentences(filename, f_module, model=None, features_enabled=[0, 3, 6, 7], root=[0, 'ROOT', 0, 'root'], perfect=False):
+def predict_sentences(filename, f_module, *args, model=None, features_enabled=[0, 3, 6, 7], root=[0, 'ROOT', 0, 'root'], perfect=False):
     sentences_test = read_conllu(filename, features_enabled, root)
 
     for s in range(len(sentences_test)):
-        full_left, full_right, part, labels = eisner(sentences_test[s], f_module, model, perfect)
+        full_left, full_right, part, labels = eisner(sentences_test[s], f_module, *args, model=model, perfect=perfect)
         sentences_test[s] = predict_sentence(sentences_test[s], f_module, full_left, full_right, part, labels)
     
     return sentences_test

@@ -61,7 +61,7 @@ def convert_morpho(w, morphos_vec):
         return result
     for m in w[morpho_i].split('|'):
         m = m.split('=')
-        if m[0] == 'Case':
+        if m[0] not in morphos_vec:
             continue
         result[morphos_vec[m[0]][m[1]]] = 1
     return result
