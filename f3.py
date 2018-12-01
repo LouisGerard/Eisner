@@ -41,6 +41,7 @@ def create_example(w1, w2, *args, positive=True):
     morphos_vec = args[0]
     embeddings = args[1]
     mean_embedding = args[2]
+    x_splitted = args[3]
 
     dist = int(w2[f2.index_i]) - int(w1[f2.index_i])
 
@@ -66,8 +67,8 @@ def create_example(w1, w2, *args, positive=True):
     if w2[next_pos_i] != '':
         pos2_next[utils.pos_2_1hot[w2[next_pos_i]]] = 1
     
-    morpho1 = convert_morpho(w1, morphos_vec)
-    morpho2 = convert_morpho(w2, morphos_vec)
+    morpho1 = f2.convert_morpho(w1, morphos_vec)
+    morpho2 = f2.convert_morpho(w2, morphos_vec)
     
     if w1[f2.lemma_i] in embeddings:
         embedding1 = embeddings[w1[f2.lemma_i]]
@@ -78,7 +79,7 @@ def create_example(w1, w2, *args, positive=True):
     else:
         embedding2 = mean_embedding
     
-    x = np.concatenate(([dist], pos1, pos2, morpho1, morpho2, embedding1, embedding2))
+    x = np.concatenate(([dist], morpho1, morpho2, embedding1, embedding2, pos1_pred, pos1, pos1_next, pos2_pred, pos2, pos2_next))
     label = np.zeros(37)
     
     y = [0, 0]
@@ -91,4 +92,9 @@ def create_example(w1, w2, *args, positive=True):
             y[1] = 1
         l = d[label_i].split(':', 1)[0]
         label[utils.labels_2_1hot[l]] = 1
+
+    if x_splitted:
+        x = x.reshape(1, -1)
+        x = [x[:, :757], x[:, 757:811], x[:, 811:]]
+
     return x, np.concatenate((y, label))
