@@ -146,15 +146,16 @@ def create_dataset(sentences, f_module, *args, with_negatives=False):
             y.append(y_token)
             
             if with_negatives:
-                i = np.random.randint(len(s) - 2)
-                if i >= int(w1[f_module.index_i]):
-                    i += 1
-                if i >= int(w2[f_module.index_i]):
-                    i += 1
-                w2_negative = s[i]
-                x_token, y_token = f_module.create_example(w1, w2, *args, positive=False)
-                x.append(x_token)
-                y.append(y_token)
+                if len(s) > 2:
+                    i = np.random.randint(len(s) - 2)
+                    if i >= int(w1[f_module.index_i]):
+                        i += 1
+                    if i >= int(w2[f_module.index_i]):
+                        i += 1
+                    w2_negative = s[i]
+                    x_token, y_token = f_module.create_example(w1, w2, *args, positive=False)
+                    x.append(x_token)
+                    y.append(y_token)
 
     return np.array(x), np.array(y)
 

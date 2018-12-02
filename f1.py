@@ -33,3 +33,15 @@ label_i = 3
 sentences_fr_train = utils.read_conllu("UD_French-GSD/fr_gsd-ud-train.conllu")
 sentences_fr_dev = utils.read_conllu("UD_French-GSD/fr_gsd-ud-dev.conllu")
 sentences_fr_test = utils.read_conllu("UD_French-GSD/fr_gsd-ud-test.conllu")
+
+sentences_en_train = utils.read_conllu("UD_English-LinES/en_lines-ud-train.conllu")
+sentences_en_dev = utils.read_conllu("UD_English-LinES/en_lines-ud-dev.conllu")
+sentences_en_test = utils.read_conllu("UD_English-LinES/en_lines-ud-test.conllu")
+
+sentences_nl_train = utils.read_conllu("UD_Dutch-LassySmall/nl_lassysmall-ud-train.conllu")
+sentences_nl_dev = utils.read_conllu("UD_Dutch-LassySmall/nl_lassysmall-ud-dev.conllu")
+sentences_nl_test = utils.read_conllu("UD_Dutch-LassySmall/nl_lassysmall-ud-test.conllu")
+
+sentences_ja_train = utils.read_conllu("UD_Japanese-GSD-master/ja_gsd-ud-train.conllu")
+sentences_ja_dev = utils.read_conllu("UD_Japanese-GSD-master/ja_gsd-ud-dev.conllu")
+sentences_ja_test = utils.read_conllu("UD_Japanese-GSD-master/ja_gsd-ud-test.conllu")
