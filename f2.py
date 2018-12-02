@@ -15,6 +15,18 @@ sentences_fr_train = utils.read_conllu("UD_French-GSD/fr_gsd-ud-train.conllu", f
 sentences_fr_dev = utils.read_conllu("UD_French-GSD/fr_gsd-ud-dev.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
 sentences_fr_test = utils.read_conllu("UD_French-GSD/fr_gsd-ud-test.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
 
+sentences_en_train = utils.read_conllu("UD_English-LinES/en_lines-ud-train.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+sentences_en_dev = utils.read_conllu("UD_English-LinES/en_lines-ud-dev.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+sentences_en_test = utils.read_conllu("UD_English-LinES/en_lines-ud-test.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+
+sentences_nl_train = utils.read_conllu("UD_Dutch-LassySmall/nl_lassysmall-ud-train.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+sentences_nl_dev = utils.read_conllu("UD_Dutch-LassySmall/nl_lassysmall-ud-dev.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+sentences_nl_test = utils.read_conllu("UD_Dutch-LassySmall/nl_lassysmall-ud-test.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+
+sentences_ja_train = utils.read_conllu("UD_Japanese-GSD-master/ja_gsd-ud-train.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+sentences_ja_dev = utils.read_conllu("UD_Japanese-GSD-master/ja_gsd-ud-dev.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+sentences_ja_test = utils.read_conllu("UD_Japanese-GSD-master/ja_gsd-ud-test.conllu", features_enabled=[0, 2, 3, 5, 6, 7], root=[0, 'ROOT', 'ROOT', '_', 0, 'root'])
+
 def count_morphos(sentences):
     morphos = {}
     no_morpho_count = 0
@@ -61,7 +73,7 @@ def convert_morpho(w, morphos_vec):
         return result
     for m in w[morpho_i].split('|'):
         m = m.split('=')
-        if m[0] not in morphos_vec:
+        if m[0] not in morphos_vec or m[1] not in morphos_vec[m[0]]:
             continue
         result[morphos_vec[m[0]][m[1]]] = 1
     return result
